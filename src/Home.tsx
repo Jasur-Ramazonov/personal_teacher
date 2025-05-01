@@ -86,7 +86,7 @@ function Home() {
       <h1 className="text-4xl font-bold absolute top-16 text-center w-full flex flex-col gap-2">
         {user ? `Hi ${user.firstName}!` : ""} <span>Let's begin Practice</span>
       </h1>
-      <p className="absolute top-48 text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold">
+      <p className="absolute top-48 text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold md:mb-0 mb-10">
         {currentQuestion}
       </p>
       <p className="absolute top-60 text-xl h-[350px] p-2 w-full text-center overflow-auto">
