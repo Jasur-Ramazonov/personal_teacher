@@ -89,7 +89,7 @@ function Home() {
       <p className="absolute top-48 text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold">
         {currentQuestion}
       </p>
-      <p className="absolute top-72 text-xl h-[350px] p-2 w-full text-center overflow-auto">
+      <p className="absolute top-72 text-xl h-[310px] p-2 w-full text-center overflow-auto">
         {spokenText ? <span>You said: {spokenText}</span> : "You said nothing"}
       </p>
       <div className="absolute bottom-16 w-full flex justify-center items-center flex-col gap-5">
