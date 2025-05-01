@@ -16,7 +16,7 @@ const Result = () => {
     
     Evaluate the following sentence as if spoken by a non-native English learner.
     
-    Give a fluency score from 0 to 9, based on grammar, vocabulary, and naturalness.
+    Give a fluency score from 0 to 9, based on grammar, vocabulary, tenses should at least 30 word, and naturalness.
     
     Return the result like this:
     Score: X
