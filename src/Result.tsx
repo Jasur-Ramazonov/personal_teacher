@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./utils/store";
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 const Result = () => {
   const [evoluationResult, setEvoluationResult] = useState("");
@@ -35,7 +35,8 @@ const Result = () => {
           headers: {
             Authorization: `Bearer ${OPENAI_API_KEY}`,
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://personal-teacher-4i6i.vercel.app", // kerakli
+            "HTTP-Referer":
+              "https://personal-teacher-4i6i-rk8to2apq-jasur-ramazonovs-projects.vercel.app", // kerakli
             "X-Title": "My GPT App",
           },
         }
