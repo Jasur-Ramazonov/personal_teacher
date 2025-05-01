@@ -10,6 +10,8 @@ const Result = () => {
   const spokenText = useSelector((state: RootState) => state.spokenText);
 
   const EvaluateEnglish = async () => {
+    console.log(OPENAI_API_KEY);
+
     const prompt = `You are an English language speaking examiner.
     
     Evaluate the following sentence as if spoken by a non-native English learner.
