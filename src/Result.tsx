@@ -53,7 +53,7 @@ const Result = () => {
     }
   }, []);
 
-  return <div>{evoluationResult ?? "please wait"}</div>;
+  return <div>{evoluationResult ? evoluationResult : "please wait"}</div>;
 };
 
 export default Result;
