@@ -2,27 +2,41 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./utils/store";
+import { useNavigate } from "react-router-dom";
 
 const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 const Result = () => {
   const [evoluationResult, setEvoluationResult] = useState("");
   const spokenText = useSelector((state: RootState) => state.spokenText);
+  const navigate = useNavigate();
 
   const EvaluateEnglish = async () => {
     console.log(OPENAI_API_KEY);
 
-    const prompt = `You are an English language speaking examiner.
-    
-    Evaluate the following sentence as if spoken by a non-native English learner.
-    
-    Give a fluency score from 0 to 9, based on grammar, vocabulary, tenses should at least 30 word, and naturalness.
-    
-    Return the result like this:
-    Score: X
-    Explanation: <your feedback>
-    
-    Sentence: "${spokenText}"`;
+    const prompt = `You are an IELTS speaking examiner assistant.
+
+Step 1: First, check if the answer has at least 30 words. If it does not, respond:
+❌ Not enough words (minimum 30 required). Evaluation skipped.
+
+Step 2: If the word count is 30 or more, evaluate the response as follows:
+
+✅ Relevant / ❌ Not Relevant
+Explanation: (Does the answer fully and directly respond to the question?)
+
+Fluency and Coherence: X/9
+Grammar: X/9
+Vocabulary: X/9
+Overall Speaking Band (estimated): X/9
+
+Grammar Mistakes & Corrections:
+(List any grammar issues and provide corrections)
+
+Unnatural or Awkward Phrasing:
+(Point out anything that doesn’t sound natural and suggest better phrasing)
+
+Original Question: ""
+User's Answer: "${spokenText}"`;
 
     try {
       const response = await axios.post(
@@ -53,7 +67,23 @@ const Result = () => {
     }
   }, []);
 
-  return <div>{evoluationResult ? evoluationResult : "please wait"}</div>;
+  return (
+    <div>
+      <p className="h-[600px]  p-2">
+        {evoluationResult ? evoluationResult : "please wait"}
+      </p>
+      <div className="flex justify-center">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="px-6 py-1.5 rounded-md bg-blue-600 text-white"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Result;
