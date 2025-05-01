@@ -33,7 +33,7 @@ const Result = () => {
           headers: {
             Authorization: `Bearer ${OPENAI_API_KEY}`,
             "Content-Type": "application/json",
-            "HTTP-Referer": "http://localhost:5173", // kerakli
+            "HTTP-Referer": "https://personal-teacher-delta.vercel.app", // kerakli
             "X-Title": "My GPT App",
           },
         }
