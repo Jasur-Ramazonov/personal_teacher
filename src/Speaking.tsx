@@ -94,7 +94,7 @@ function Speaking() {
       <h1 className="md:text-4xl text-xl font-bold absolute top-16 text-center w-full flex flex-col gap-2">
         <span>Let's begin Practice</span>
       </h1>
-      <div className="absolute top-48 flex flex-col justify-center items-center w-full">
+      <div className="absolute md:top-48 top-36 flex flex-col justify-center items-center w-full">
         <select
           onChange={(e) => {
             setUserLevel(e.target.value as Questions);
