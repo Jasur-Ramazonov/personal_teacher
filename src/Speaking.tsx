@@ -91,7 +91,7 @@ function Speaking() {
   return (
     <div className="w-full h-[100vh] relative">
       <Header />
-      <h1 className="text-4xl font-bold absolute top-16 text-center w-full flex flex-col gap-2">
+      <h1 className="md:text-4xl text-xl font-bold absolute top-16 text-center w-full flex flex-col gap-2">
         <span>Let's begin Practice</span>
       </h1>
       <div className="absolute top-48 flex flex-col justify-center items-center w-full">
@@ -107,11 +107,11 @@ function Speaking() {
           <option value="intermediateQuestions">Intermediate</option>
           <option value="upperIntermediateQuestions">UpperIntermediate</option>
         </select>
-        <p className="text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold">
+        <p className="md:text-xl text-base h-[100px] p-2 w-full text-center overflow-auto font-semibold">
           {currentQuestion}
         </p>
       </div>
-      <p className="absolute top-72 text-xl h-[310px] p-2 w-full text-center overflow-auto">
+      <p className="absolute top-72 md:text-xl text-sm h-[310px] p-2 w-full text-center overflow-auto">
         {spokenText ? <span>You said: {spokenText}</span> : "You said nothing"}
       </p>
       <div className="absolute bottom-16 w-full flex justify-center items-center flex-col gap-5">

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="flex justify-between p-2">
-      <Link to={"/"} className="text-3xl font-bold">
+      <Link to={"/"} className="md:text-3xl text-xl font-bold">
         Personal Teacher
       </Link>
       <div>
