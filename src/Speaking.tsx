@@ -10,34 +10,42 @@ import { setSpokenText2 } from "./utils/slice";
 import Header from "./Header";
 import { useUser } from "@clerk/clerk-react";
 import { RootState } from "./utils/store";
+enum Questions {
+  BEGINNER = "beginnerQuestions",
+  ELEMENTARY = "elementaryQuestions",
+  PREINTERMEDIATE = "preIntermediateQuestions",
+  INTERMEDIATE = "intermediateQuestions",
+  UPPERINTERMADIATE = "upperIntermediateQuestions",
+}
 
-function Home() {
+function Speaking() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioRef2 = useRef<HTMLAudioElement | null>(null);
   const [isClicked, setIsClicked] = useState(false);
   const [spokenText, setSpokenText] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [userLevel, setUserLevel] = useState<Questions>(Questions.BEGINNER);
   const dispatch = useDispatch();
   const { user } = useUser();
   const questions = useSelector((state: RootState) => {
-    return state.advancedSpeakingQuestions;
+    if (userLevel) {
+      state.upperIntermediateQuestions;
+      return state[userLevel];
+    }
+    return [];
   });
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    const currentQuestion =
-      questions[Math.floor(Math.random() * questions.length)];
-    setCurrentQuestion(currentQuestion);
     audioRef.current = new Audio(myAudio);
     audioRef2.current = new Audio(myAudio2);
   }, []);
 
   useEffect(() => {
-    if (user) {
-      console.log(user.firstName);
-    }
-  }, [user]);
+    const currentQuestion =
+      questions[Math.floor(Math.random() * questions.length)];
+    setCurrentQuestion(currentQuestion);
+  }, [userLevel]);
 
   const handleSpeak = (arg: "start" | "end") => {
     const SpeechRecognition =
@@ -84,11 +92,25 @@ function Home() {
     <div className="w-full h-[100vh] relative">
       <Header />
       <h1 className="text-4xl font-bold absolute top-16 text-center w-full flex flex-col gap-2">
-        {user ? `Hi ${user.firstName}!` : ""} <span>Let's begin Practice</span>
+        <span>Let's begin Practice</span>
       </h1>
-      <p className="absolute top-48 text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold">
-        {currentQuestion}
-      </p>
+      <div className="absolute top-48 flex flex-col justify-center items-center w-full">
+        <select
+          onChange={(e) => {
+            setUserLevel(e.target.value as Questions);
+          }}
+          className="border py-2 px-4 rounded-md cursor-pointer"
+        >
+          <option value="beginnerQuestions">Beginner</option>
+          <option value="elementaryQuestions">Elementary</option>
+          <option value="preIntermediateQuestions">PreIntermediate</option>
+          <option value="intermediateQuestions">Intermediate</option>
+          <option value="upperIntermediateQuestions">UpperIntermediate</option>
+        </select>
+        <p className="text-xl h-[100px] p-2 w-full text-center overflow-auto font-semibold">
+          {currentQuestion}
+        </p>
+      </div>
       <p className="absolute top-72 text-xl h-[310px] p-2 w-full text-center overflow-auto">
         {spokenText ? <span>You said: {spokenText}</span> : "You said nothing"}
       </p>
@@ -137,4 +159,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Speaking;
