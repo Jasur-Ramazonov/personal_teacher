@@ -1,17 +1,15 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 const Writing = () => {
-  const [currentTopic, setCurrentTopic] = useState(
-    "Some people think that learning English online is more effective than learning in a classroom. Do you agree or disagree? Give reasons for your answer"
-  );
+  const currentTopic =
+    "Some people think that learning English online is more effective than learning in a classroom. Do you agree or disagree? Give reasons for your answer";
   const [wrotenText, setWrotenText] = useState("");
   const [evoluationResult, setEvoluationResult] = useState("");
 
-  const { register, handleSubmit, reset } = useForm<{ text: string }>();
+  const { register, handleSubmit } = useForm<{ text: string }>();
 
   const evoluateWriting = async () => {
     const prompt = `You are an IELTS Speaking Examiner Assistant.
