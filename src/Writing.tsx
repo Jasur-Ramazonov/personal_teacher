@@ -12,29 +12,36 @@ const Writing = () => {
   const { register, handleSubmit } = useForm<{ text: string }>();
 
   const evoluateWriting = async () => {
-    const prompt = `You are an IELTS Speaking Examiner Assistant.
+    const prompt = `You are an experienced English writing examiner.
 
-Evaluate the student's wroten response based on the IELTS writing criteria. Use the structure below:
+Evaluate the student's writing using the following structure:
 
-✅ Relevant / ❌ Not Relevant  
-Explanation: (Does the answer fully and directly respond to the question?)  
+✅ Task Achievement: X/9  
+(Does the student answer the prompt fully and appropriately?)
 
-Fluency and Coherence: X/9  
-Grammar: X/9  
-Vocabulary: X/9  
-Pronunciation: X/9  
-Estimated Overall Band Score: X/9  
+✅ Coherence and Cohesion: X/9  
+(Is the writing well-organized and easy to follow?)
 
-🛠 Grammar Mistakes & Corrections:  
-(List any grammar issues and correct them)
+✅ Grammar Range and Accuracy: X/9  
+(Are tenses, structures, and punctuation used correctly?)
 
-🗣 Unnatural or Awkward Phrasing:  
-(Point out phrases that sound unnatural and suggest improvements)
+✅ Vocabulary: X/9  
+(Is the vocabulary appropriate, varied, and precise?)
 
----
+📌 Overall Band Score (estimated): X/9
 
-🎯 Original IELTS Topic: "${currentTopic}"  
-🗣 User's Spoken Answer: "${wrotenText}"`;
+🛠 Grammar Issues and Corrections:  
+- Point out grammar mistakes and suggest corrections.
+
+🗣 Awkward or Unnatural Phrasing:  
+- Identify phrases that don’t sound natural and suggest improvements.
+
+💬 Topic:  
+"${currentTopic}"
+
+📝 Student's Response:  
+"${wrotenText}"
+`;
 
     try {
       const response = await axios.post(
