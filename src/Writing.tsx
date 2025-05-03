@@ -14,7 +14,7 @@ const Writing = () => {
   const evoluateWriting = async () => {
     const prompt = `You are an IELTS Speaking Examiner Assistant.
 
-Evaluate the student's spoken response based on the IELTS speaking criteria. Use the structure below:
+Evaluate the student's wroten response based on the IELTS writing criteria. Use the structure below:
 
 ✅ Relevant / ❌ Not Relevant  
 Explanation: (Does the answer fully and directly respond to the question?)  
@@ -47,7 +47,7 @@ Estimated Overall Band Score: X/9
           headers: {
             Authorization: `Bearer ${OPENAI_API_KEY}`,
             "Content-Type": "application/json",
-            Referer: "http://localhost:5173/", // kerakli
+            Referer: "https://personal-teacher-wheat.vercel.app/", // kerakli
             "X-Title": "My GPT App",
           },
         }
@@ -75,6 +75,9 @@ Estimated Overall Band Score: X/9
       </p>
       <form
         onSubmit={handleSubmit((data) => {
+          if (evoluationResult.trim() !== "") {
+            setEvoluationResult("");
+          }
           setWrotenText(data.text);
         })}
       >
@@ -100,7 +103,9 @@ Estimated Overall Band Score: X/9
             "please wait"
           )
         ) : (
-          <span className="text-2xl font-semibold">enter your essay</span>
+          <span className="text-2xl font-semibold text-red-500">
+            enter your essay
+          </span>
         )}
       </p>
     </div>

@@ -47,7 +47,7 @@ User's Answer: "${spokenText}"`;
           headers: {
             Authorization: `Bearer ${OPENAI_API_KEY}`,
             "Content-Type": "application/json",
-            Referer: "http://localhost:5173/", // kerakli
+            Referer: "https://personal-teacher-wheat.vercel.app/", // kerakli
             "X-Title": "My GPT App",
           },
         }
