@@ -96,7 +96,7 @@ Evaluate the student's writing using the following structure:
         <div className="flex justify-end">
           <button
             type="submit"
-            className="border px-6 py-1.5 rounded-md bg-blue-600 text-white"
+            className="border px-6 py-1.5 rounded-md bg-blue-600 text-white md:w-fit w-full"
           >
             Submit
           </button>
@@ -110,9 +110,7 @@ Evaluate the student's writing using the following structure:
             "please wait"
           )
         ) : (
-          <span className="text-2xl font-semibold text-red-500">
-            enter your essay
-          </span>
+          <span className="text-2xl font-semibold">enter your essay</span>
         )}
       </p>
     </div>
