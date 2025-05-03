@@ -4,6 +4,7 @@ export const mySlice = createSlice({
   name: "mySlice",
   initialState: {
     spokenText: "",
+    orginalQuestion: "",
     upperIntermediateQuestions: [
       "Do you think money can buy happiness? Why or why not?",
       "Should students be allowed to use smartphones in class? Explain your opinion.",
@@ -79,7 +80,10 @@ export const mySlice = createSlice({
     setSpokenText2: (state, action) => {
       state.spokenText = action.payload;
     },
+    setOrginalQuestion: (state, action) => {
+      state.orginalQuestion = action.payload;
+    },
   },
 });
 
-export const { setSpokenText2 } = mySlice.actions;
+export const { setSpokenText2, setOrginalQuestion } = mySlice.actions;

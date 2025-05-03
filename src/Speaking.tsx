@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSpokenText2 } from "./utils/slice";
+import { setOrginalQuestion, setSpokenText2 } from "./utils/slice";
 import Header from "./Header";
 import { useUser } from "@clerk/clerk-react";
 import { RootState } from "./utils/store";
@@ -45,6 +45,7 @@ function Speaking() {
     const currentQuestion =
       questions[Math.floor(Math.random() * questions.length)];
     setCurrentQuestion(currentQuestion);
+    dispatch(setOrginalQuestion(currentQuestion));
   }, [userLevel]);
 
   const handleSpeak = (arg: "start" | "end") => {

@@ -9,17 +9,21 @@ const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 const Result = () => {
   const [evoluationResult, setEvoluationResult] = useState("");
   const spokenText = useSelector((state: RootState) => state.spokenText);
+  const currentQuestion = useSelector(
+    (state: RootState) => state.orginalQuestion
+  );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(currentQuestion);
+  }, []);
 
   const EvaluateEnglish = async () => {
     console.log(OPENAI_API_KEY);
 
     const prompt = `You are an IELTS speaking examiner assistant.
 
-Step 1: First, check if the answer has at least 30 words. If it does not, respond:
-❌ Not enough words (minimum 30 required). Evaluation skipped.
-
-Step 2: If the word count is 30 or more, evaluate the response as follows:
+ Evaluate the response as follows:
 
 ✅ Relevant / ❌ Not Relevant
 Explanation: (Does the answer fully and directly respond to the question?)
@@ -35,7 +39,7 @@ Grammar Mistakes & Corrections:
 Unnatural or Awkward Phrasing:
 (Point out anything that doesn’t sound natural and suggest better phrasing)
 
-Original Question: ""
+Original Question: "${currentQuestion}"
 User's Answer: "${spokenText}"`;
 
     try {
@@ -49,7 +53,7 @@ User's Answer: "${spokenText}"`;
           headers: {
             Authorization: `Bearer ${OPENAI_API_KEY}`,
             "Content-Type": "application/json",
-            Referer: "https://personal-teacher-wheat.vercel.app", // kerakli
+            Referer: "http://localhost:5173/", // kerakli
             "X-Title": "My GPT App",
           },
         }
@@ -63,7 +67,13 @@ User's Answer: "${spokenText}"`;
 
   useEffect(() => {
     if (spokenText.trim() !== "") {
-      EvaluateEnglish();
+      if (spokenText.split(" ").length > 10) {
+        EvaluateEnglish();
+      } else {
+        setEvoluationResult(
+          "You didn't say sentences. Required 10 words at leaset"
+        );
+      }
     }
   }, []);
 
@@ -75,7 +85,7 @@ User's Answer: "${spokenText}"`;
       <div className="flex justify-center">
         <button
           onClick={() => {
-            navigate("/");
+            navigate("/speaking");
           }}
           className="px-6 py-1.5 rounded-md bg-blue-600 text-white"
         >
