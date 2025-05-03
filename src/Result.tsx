@@ -14,13 +14,7 @@ const Result = () => {
   );
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(currentQuestion);
-  }, []);
-
   const EvaluateEnglish = async () => {
-    console.log(OPENAI_API_KEY);
-
     const prompt = `You are an IELTS speaking examiner assistant.
 
  Evaluate the response as follows:

@@ -2,7 +2,7 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 
-const Home2 = () => {
+const Home = () => {
   const { user } = useUser();
 
   return (
@@ -32,4 +32,4 @@ const Home2 = () => {
   );
 };
 
-export default Home2;
+export default Home;
