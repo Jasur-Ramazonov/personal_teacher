@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import Header from "./Header";
 import { FaClock } from "react-icons/fa";
 import clsx from "clsx";
+import { FaCircleCheck } from "react-icons/fa6";
+import { span } from "framer-motion/client";
 const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 const Writing = () => {
@@ -11,6 +13,8 @@ const Writing = () => {
     "Some people think that learning English online is more effective than learning in a classroom. Do you agree or disagree? Give reasons for your answer";
   const [wrotenText, setWrotenText] = useState("");
   const [evoluationResult, setEvoluationResult] = useState("");
+  const [words, setWords] = useState(0);
+  const [characters, setCharacters] = useState(0);
 
   const { register, handleSubmit } = useForm<{ text: string }>();
 
@@ -105,12 +109,29 @@ Evaluate the student's writing using the following structure:
           >
             <textarea
               {...register("text")}
+              onChange={(e) => {
+                console.log(e.target.value);
+                if (e.target.value.trim() !== "") {
+                  const essay = e.target.value.split(" ");
+                  const words = essay.length;
+                  setWords(words);
+                  const characters = essay
+                    .map((itm) => {
+                      return itm.length;
+                    })
+                    .reduce((acc, val) => acc + val, 0);
+                  setCharacters(characters);
+                } else {
+                  setWords(0);
+                  setCharacters(0);
+                }
+              }}
               className="flex w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[300px] text-gray-800 resize-none border-gray-300 focus:border-blue-500 mb-4"
-              placeholder="Start writing your assay here..."
+              placeholder="Start writing your essay here..."
             ></textarea>
             <div className="flex items-center justify-between">
               <div className="text-gray-500 text-sm">
-                0 words | 0 characters
+                {words} words | {characters} characters
               </div>
               <button
                 type="submit"
@@ -120,27 +141,64 @@ Evaluate the student's writing using the following structure:
               </button>
             </div>
           </form>
-          <p
-            className={clsx(
-              "text-center overflow-auto",
-              evoluationResult ? "h-[300px]" : ""
-            )}
-          >
-            {wrotenText.trim() ? (
-              evoluationResult ? (
-                evoluationResult
-              ) : (
-                "please wait"
-              )
-            ) : (
-              <span className="text-2xl font-semibold">enter your essay</span>
-            )}
-          </p>
         </div>
-        <div>
-          <div>
-            <h3>Writing Tips</h3>
+        <div className="col-span-1 space-y-6">
+          <div className="rounded-xl border p-6 shadow-md">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Writing Tips
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2">
+                <div className="flex items-start my-1 ">
+                  <FaCircleCheck className="text-green-500 lg:text-lg text-lg" />
+                </div>
+                <span className="text-gray-700">
+                  Structure your essay with clear introduction, body paragraphs,
+                  and conclusion
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="flex items-start my-1 ">
+                  <FaCircleCheck className="text-green-500 lg:text-lg text-lg" />
+                </div>
+                <span className="text-gray-700">
+                  Use specific examples to support your arguments
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="flex items-start my-1 ">
+                  <FaCircleCheck className="text-green-500 lg:text-lg text-lg" />
+                </div>
+                <span className="text-gray-700">
+                  Vary your sentence structures and vocabulary
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <div className="flex items-start my-1 ">
+                  <FaCircleCheck className="text-green-500 lg:text-lg text-lg" />
+                </div>
+                <span className="text-gray-700">
+                  Aim for 250-300 words for optimal length
+                </span>
+              </li>
+            </ul>
           </div>
+          {evoluationResult ? (
+            <div className="rounded-xl border p-6 shadow-md">
+              <p
+                className={clsx(
+                  "text-center overflow-auto",
+                  evoluationResult ? "h-[300px]" : ""
+                )}
+              >
+                {evoluationResult}
+              </p>
+            </div>
+          ) : wrotenText.trim() ? (
+            <span className="p-2">please wait</span>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
