@@ -5,7 +5,6 @@ import Header from "./Header";
 import { FaClock } from "react-icons/fa";
 import clsx from "clsx";
 import { FaCircleCheck } from "react-icons/fa6";
-
 const OPENAI_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 const Writing = () => {
