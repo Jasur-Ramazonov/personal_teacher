@@ -128,7 +128,7 @@ Evaluate the student's writing using the following structure:
               className="flex w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[300px] text-gray-800 resize-none border-gray-300 focus:border-blue-500 mb-4"
               placeholder="Start writing your essay here..."
             ></textarea>
-            <div className="flex items-center justify-between">
+            <div className="flex md:flex-row md:gap-0 gap-2 flex-col items-center justify-between">
               <div className="text-gray-500 text-sm">
                 {words} words | {characters} characters
               </div>
